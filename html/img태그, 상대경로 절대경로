@@ -1,0 +1,24 @@
+<img src = "images/apple.jpg" alt="사과"> alt는 필수는 아니지만 이미지를 설명하는 역할을 함.
+만약 화면에 저 경로의 이미지를 찾을 수 없을때, alt값을 화면에 대신 보여줌.
+
+절대경로 : 절대적 고유 경로. 웹 프로토콜 전체 경로. pc 컴퓨터 절대경로 덩.
+단점 : 파일이 다른 곳으로 옮겨질때 절대 경로를 다시 수정해야함.
+
+상대경로 : 현재 문서를 기준으로 경로를 인식하는 법.
+index.html에서 동일한 위치에 있는 apple.png를 가져오는 법 => src="apple.png"또는 src = "./apple.png"
+index.html의 상위 폴더에 이미지가 있는 경우 => src = "../apple.png"
+index.html의 하위 폴더에 이미지가 있는 경우 => src = "하위폴더/apple.png"
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>img media</title>
+  </head>
+  <body>
+    <h2>이미지 태그</h2>
+    <img width="200" height="200" src="../dog.jpg" alt="나무" />
+  </body>
+</html>
