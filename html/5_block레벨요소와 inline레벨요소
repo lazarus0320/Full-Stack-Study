@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inline</title>
+    <style>
+      div {
+        background-color: red;
+      }
+      span {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <!--div태그는 박스형으로 영역 차지(컨테이너) : block-->
+      애국가(愛國歌)는 대한민국의 국가이다. 1919년 안창호에 의해 대한민국
+      임시정부에서 스코틀랜드 민요인 〈작별〉에 삽입해서 부르기 시작하다가
+      1935년 한국의 작곡가 안익태가 지은 《한국환상곡》에 가사를 삽입해서
+      현재까지 부르고 있다.
+    </div>
+    <span>
+      <!--span태그는 문장의 컨텐츠만큼만 영역 차지(특정 아이템) : inline-->
+      애국가(愛國歌)는 대한민국의 국가이다. 1919년 안창호에 의해 대한민국
+      임시정부에서 스코틀랜드 민요인 〈작별〉에 삽입해서 부르기 시작하다가
+      1935년 한국의 작곡가 안익태가 지은 《한국환상곡》에 가사를 삽입해서
+      현재까지 부르고 있다.
+    </span>
+  </body>
+</html>
+
+
+block 레벨 요소 : 부모 요소의 전체 공간 차지. <h1~h6> <ol> <ul> <li> <p>
+화면 구성, 레이아웃 짤 때 사용
+한칸을 모두 차지하기 때문에 세로로 나열됨.
+width, height, margin 속성이 적용됨.
+
+inline 레벨 요소 : 콘텐츠 흐름을 끊지 않고(줄바꿈X) 요소를 구성하는 태그에 할당된 공간만 차지. <a> <em> <img> <span>
+콘텐츠 영역만큼만 차지하므로 가로로 나열됨.
+margin-top, margin-bottom 적용되지 않음. 대신 line-height이용.
+width, height, text-align 속성 적용 x
+ 
