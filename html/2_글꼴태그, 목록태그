@@ -1,0 +1,70 @@
+<h1> ~ <h6> : 제목, 부제목. 숫자 작을수록 작 제목
+<p> : 문단
+<hr> : 가로선
+<br> : 개행(종료태그x, 여러개해도 한줄만 개행됨)
+<i> : 이텔릭체로 표시
+<em> : 이텔릭체+강조
+<b> : 진하게
+<strong> 진하게 강조
+
+strong과 em 태그는 실제로 페이지 내의 중요한 부분으로 강조하고 싶을 때 사용. (웹 접근성에 큰 기여를 함)
+예시로 스크린 리더를 브라우저에서 사용하는경우 strong 태그에는 거센 억양으로 음을 내기도 함.
+
+
+<ol> 순서가 있는 목록. type 속성으로 글머리 기호 변경 가능
+<ul> 순서 없는 목록
+<li> 목록 하위 항목으로 사용되고 <ul>이나 <ol> 하위에 위치.
+<dl> 사전첨 용어를 설명하는 목록 만듬.
+<dt> 정의되는 용어의 제목 넣을 때 사용
+<dd> 정의되는 용어를 설명하는 데 사용
+
+<dl>은 하나 이상의 <dt><dd>쌍의 태그를 가지고 있어야 함.
+단, <dt>-<dd> 태그가 반드시 하나의 짝으로 지어져야 하는 것은 아니다.
+<li>, <dt><dd> 태그는 밖에서 독립적으로 사용할 수 없다.
+<ul> 태그 하위요소로는 <li> 태그가 위치해야 한다.
+
+vscode의 멀티셀렉트 기능.
+ctrl+alt하면서 방향키로 다른 줄로 움직이면 커서가 여러줄을 동시에 점유할 수 있음.
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>김치볶음밥</h1>
+    <ol>
+      <li>프라이팬을 살짝 달군뒤 식용유(혹은 버터)를 두른다.[3][4]</li>
+      <li>프라이팬의 온도가 적당히 올라가면 계란을 깨서 넣는다.</li>
+      <li>타지 않도록 최대한 주의한다.</li>
+      <li>취향에 맞추어 뒤집으면서[5] 굽는다.</li>
+      <li>취향에 따라 소금 등의 조미료[6]나 향신료[7]를 넣는다.</li>
+      <li>익었으면 꺼내서 접시에 담는다.</li>
+    </ol>
+    <hr />
+    <h1>헬스 3대 운동</h1>
+    <ul>
+      <li>벤치프레스</li>
+      <li>데드리프트</li>
+      <li>스쿼트</li>
+    </ul>
+    <hr />
+    <h1>웹 개발 입문 과목</h1>
+    <dl>
+      <dt>HTML</dt>
+      <dd>
+        Hyper Text markup Language의 <br />약자로 웹 문서를 만들기 위한
+        <strong>마크업 언어.</strong>
+      </dd>
+      <dt>CSS</dt>
+      <dd>Cascading Style Sheets의 <br />약자로 HTML을 꾸미는 스타일 시트.</dd>
+      <dt>JavaScript</dt>
+      <dd>
+        웹페이지를 생동감 있게 동작시키기 위한<br /><b>프로그래밍 언어</b>이다.
+      </dd>
+    </dl>
+  </body>
+</html>

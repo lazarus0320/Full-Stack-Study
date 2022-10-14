@@ -1,0 +1,129 @@
+가로는 행 세로는 열
+<table> 표
+<tr> 행. 자식으로 <th>나 <td>가 반드시 있어야함.
+<td> 열
+<th> 표의 제목 열.
+
+<caption> 표의 제목이나 설명 작성
+<colgroup> 열을 그룹으로 묶을 수 있도록 해줌.
+<thead> 표의 제목 열들을 묶는 그룹 태그
+<tbody> 표의 일반적인 데이터들을 묶는 그룹태그. 기본적으로 행그룹태그를 사용하지 않으면 크롬브라우저가 자동으로 tbody 태그로 묶어준다.
+<tfoot> 표의 하단 영역을 묶는 그룹태그.
+
+<th> <td> 태그 중
+colspan 열 병합 속성 예 : <td colspan="2">
+rowspan 행 병합 속성 예 : <td rowspan="2">
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table tag</title>
+    <style>
+      table {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 12px;
+      }
+      .col1 {
+        width: 80px;
+      }
+      .col2 {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Table 기본</h1>
+    <table>
+      <caption>
+        프로필 테이블
+      </caption>
+      <tr>
+        <th>이름</th>
+        <th>취미</th>
+        <th>특기</th>
+      </tr>
+      <tr>
+        <td>홍길동</td>
+        <td>도술</td>
+        <td>축지법</td>
+      </tr>
+      <tr>
+        <td>짐코딩</td>
+        <td>헬스</td>
+        <td>코딩</td>
+      </tr>
+    </table>
+    <hr />
+    <h1>Table 그룹 태그</h1>
+    <table>
+      <caption>
+        학급 점수
+      </caption>
+      <colgroup>
+        <col class="col1" />
+        <col class="col2" />
+        <col class="col3" />
+        <col class="col4" />
+        <col class="col5" />
+        <col class="col6" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>반</th>
+          <th>이름</th>
+          <th>국어</th>
+          <th>영어</th>
+          <th>수학</th>
+          <th>코딩</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td rowspan="2">1반</td>
+          <!--4가 안되는 이유, 맨 마지막 행은 tfoot으로 따로 분리가 되어있기 때문!-->
+          <td>홍길동</td>
+          <td>90</td>
+          <td>100</td>
+          <td>90</td>
+          <td>81</td>
+        </tr>
+        <tr>
+          <td>짐코딩</td>
+          <td>85</td>
+          <td>81</td>
+          <td>95</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td>짐코딩</td>
+          <td>85</td>
+          <td>81</td>
+          <td>95</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="2">평균</td>
+          <td>87.5</td>
+          <td>90.5</td>
+          <td>92.5</td>
+          <td>90.5</td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>
+
+
