@@ -373,3 +373,344 @@ div>span { /* div의 바로 하위에 있는 모든 span 태그에 적용 */
 <p>태그와 바로 인접한 첫번째 <li>태그에 대해서만 스타일을 적용했다.
 
 ```
+
+# 글꼴 속성 정리
+<hr/>
+
+글꼴 종류 지정
+
+* font-family: serif, monospace; => serif라는 글꼴을 적용하고 만약 안되면 monospace 글꼴을 적용함.(하나만 써도 됨) 
+
+ 
+
+글자 크기
+
+* font-size: 16px;
+
+ 
+
+이텔릭체 여부 지정
+
+* font-style: italic;
+
+ 
+
+글자 굵기 지정
+
+* font-weight: bold;
+
+ 
+
+소문자를 작은 대문자로 바꿈
+
+* font-variant: small-caps;
+
+ 
+
+단위
+
+* px : 픽셀 단위
+
+* rem :  루트 요소의 글꼴 크기(html). ex) 2rem은 html글꼴 크기의 2배
+
+* em : 요소의 글꼴 크기. 현재 자기 자신 폰트 사이즈의 몇배로 할것인가?
+
+* vw : viewport 너비의 1% viewport는 현재 보이는 화면 사이
+
+* vh : viewport 높이의 1%
+
+ 
+
+예시
+```CSS
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>good</title>
+    <style>
+      .test-rem {
+        font-size: 2rem;
+      }
+      .test-em {
+        font-size: 2em;
+      }
+      .chunk {
+        font-size: 15px;
+      }
+      .test-varient {
+        font-variant: small-caps;
+      }
+      .test-rectangle {
+        width: 10vw;
+        height: 10vh;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="test-rem">예시 문장1</p>
+    <div class="chunk">
+      <p class="test-em">예시 문장2</p>
+    </div>
+    <p class="test-varient">example sentence</p>
+
+    <h2>Rectangle Test</h2>
+    <div class="test-rectangle"></div>
+  </body>
+</html>
+```
+
+예시문장1은 2rem의 크기로 적용된다. rem은 최상위 태그인 html의 속성을 상속받는다.
+
+html내 스타일에서 글꼴 크기가 16px로 적용되었기 때문에 2rem은 32px와 같다.
+
+ 
+
+예시문장2는 2em의 크기로 적용된다. em은 자기 요소 내의 글자 크기 속성값에 배수를 해준 것과 같으므로
+
+2em은 15x2 = 30px이다.
+
+ 
+
+따라서 예시문장1이 미세하게 더 크게 나오게 된 것이다.
+
+
+# Box Model(content, padding, border, margin), Box Sizing
+<hr/>
+## Box Model CSS 속성
+박스 모델은 속성을 지정하지 않으면 브라우저가 선언한 기본값으로 세팅되며, 우리는 CSS 속성으로 박스 모델 값을 변경할 수 있다.
+
+가장 안쪽 영역부터 content, padding, border, margin이라고 한다.
+
+### Content
+* width, height : 가로, 세로 너비 지정
+ex) width: 200px;
+
+ 
+
+인라인 요소에는 width, height가 적용되지 않음. 인라인 요소는 콘텐츠만큼의 영역을 갖기 때문
+
+* display: inline-block으로 가로 세로 너비를 변경 가능함.
+
+```CSS
+span {
+        border: 1px solid red;
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+      }
+ ```
+
+### 바깥 여백 Margin
+margin-top, margin-bottom, margin-left, margin-right 속성으로 지정가능. 보통 4개를 다 쓰지만 생략도 가능.
+
+```CSS
+margin: 4px 2px 2px 4px;
+margin-top: 20px;
+```
+
+### 마진 중첩
+
+HTML요소를 세로 배치할 경우 margin과 margin이 만날 때 margin이 큰 쪽으로 겹쳐짐. 
+
+ 
+
+예시
+```CSS
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .shape {
+        border: 1px solid red;
+        width: 100px;
+        height: 100px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </body>
+</html>
+```
+
+margin 20px 짜리가 두개 합쳐지면 40이 돼야 하는데 20으로 되었다.
+
+```CSS
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .shape {
+        border: 1px solid red;
+        width: 100px;
+        height: 100px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shape" style="margin-bottom: 40px"></div> /*인라인 스타일을 적용하면 우선순위로 적용됨. */
+    <div class="shape"></div>
+  </body>
+</html>
+```
+
+위쪽 요소의 마진이 더 크기 때문에 마진값이 크게 적용된 것을 확인할 수 있다.
+
+ 
+
+ 
+
+### Border
+
+html요소의 테두리
+
+border, border-width, border-style, border-color 속성
+
+4개 방향 값 한번에 지정 시 top->right->bottom->left 순
+
+예시
+```CSS
+border-style: solid;
+border-style: dotted solid dashed solid;
+border-left-style: solid;
+```
+
+* border-width 테두리 두께 지정.
+
+thin, medium, thick이 값으로 올 수 있음.
+
+예시
+```CSS
+border-width: 1px;
+border-width: thin thin;
+border-width: 8px 5px 4px 9px;
+border-left-width: 2px;
+```
+
+* border-color 테두리 색상 지정
+
+예시
+```CSS
+border-color: blue;
+border-color: yellow red;
+```
+
+### border
+단축 속성.
+
+border-top, border-right, border-left, border-bottom을 사용해 스타일을 각각 지정할 수 있음
+
+예시
+```CSS
+border: 1px solid red;
+border: 4px dashed green;
+```
+
+* border-radius 테두리 꼭짓점을 둥글게 만듬. (50%는 완전한 원이 됨)
+
+예시
+```CSS
+border-radius: 30px;
+border-radius: 10% 20%;
+```
+
+ 
+
+## Box Sizing
+HTML요소의 너비와 높이를 계산하는 방법 지정.
+
+ 
+
+* content-box : 기본 CSS박스 크기 결정법.
+CSS 박스 모델에서 지정한 너비, 높이는 HTML요소의 Content 크기에 적용됨.
+
+요소에 테두리(Border)나 안쪽 여백(Padding)이 있으면 너비와 높이에 더해서 화면에 그림.
+
+ 
+
+* border-box : 테두리와 안쪽 여백도 요소의 크기(너비, 높이)로 고려함. 
+너비를 100px 설정시, 테두리와 안쪽 여백을 추가하면, 콘텐츠 영역이 줄어드어 100px를 유지함.
+```CSS
+box-sizing: content-box;
+box-sizing: border-box;
+```
+
+예시
+```CSS
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .border {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+      }
+      .border-radius {
+        margin: 20px;
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        border-radius: 50%;
+      }
+      .content-box {
+        width: 100px;
+        height: 100px;
+        padding: 20px;
+        border: 10px solid blue;
+        box-sizing: content-box;
+      }
+      .border-box {
+        width: 100px;
+        height: 100px;
+        border: 10px solid red;
+        padding: 20px;
+        margin: 10px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="border"></div>
+    <div class="border-radius"></div>
+    <div class="content-box"></div>
+    <div class="border-box"></div>
+  </body>
+</html>
+```
+
+3번째에는 box-sizing: content-box;를 적용했다.
+
+
+너비와 높이에 padding과 border값이 합쳐져서 적용되어 사각형이 크게 그려진 것을 확인할 수 있다.
+
+ 
+
+4번째에는 box-sizing: border-box;를 적용했다.
+
+
+padding과 border가 합쳐진 값을 포함해서 너비, 높이를 고려하기 때문에 content크기가 줄어들면서 총합 100의 크기를 유지하는 것을 확인할 수 있다.
+
+ 
+
+padding과 border값까지 고려하면서 html 코딩하기가 힘들기 때문에 border-box 속성을 이용하여 content 배치할 때 계산하기가 훨씬 용이해진다.
