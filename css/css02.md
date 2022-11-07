@@ -179,3 +179,130 @@ inline-border는 가로로 배치되며, width, height를 조정할 수 있다. 
   </body>
 </html>
 ```
+
+## float 속성
+<hr/>
+
+### float 속성
+html요소에 적용시키면 기본적인 흐름에서 벗어나 둥둥 떠다니듯 배치가 됨.
+
+인접한 텍스트나 인라인 요소가 그 주위를 자연스럽게 감싸도록 배치가 되는 것을 말함.
+
+* none : 기본값. 요소를 띄우지 않음.
+* left : 왼쪽에 띄움
+* right : 오른쪽에 띄움
+* inherit : 부모 요소로부터 상속함
+* initial : 기본값으로 설정
+ 
+
+### clear 속성
+* float의 left나 right값을 취소함.
+* clear: none; - 기본값
+* clear: left; - 왼쪽을 취소
+* clear: right; 오른쪽을 취소
+* clear: both; 둘다 취소
+
+예시
+```CSS
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 600px;
+        border: 1px solid grey;
+      }
+      img {
+        width: 200px;
+      }
+      .float-left {
+        float: left;
+      }
+      .float-right {
+        float: right;
+      }
+      p {
+        border: 1px solid blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img class="float-left" src="../assets/images/2.jpg" alt="없음" />
+      <p>
+        팥빙수 조아팥빙수 조아팥빙수 조아팥빙수 조아팥빙수 조아 팥빙수
+        조아팥빙수 조아팥빙수 조아팥빙수 조아팥빙수 조아 팥빙수 조아팥빙수
+        조아팥빙수 조아팥빙수 조아팥빙수 조아
+      </p>
+
+      <img class="float-right" src="../assets/images/7.PNG" alt="없음" />
+      <p>
+        활명수 조아 활명수 조아활명수 조아활명수 조아활명수 조아활명수 조아
+        활명수 조아활명수 조아활명수 조아활명수 조아활명수 조아활명수 조아
+        활명수 조아활명수 조아활명수 조아활명수 조아활명수 조아
+      </p>
+    </div>
+  </body>
+</html>
+```
+이미지가 각각 왼쪽 오른쪽편에서 글자와 어울려 정렬되어있는 것을 확인할 수 있다.
+
+만약 두번째 <p>태그를 첫번째 이미지와 겹치지 않는 새로운 라인에서 시작하고 싶다면 아래와 같은 방법을 사용해야한다.
+
+```CSS
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 600px;
+        border: 1px solid grey;
+      }
+      img {
+        width: 200px;
+      }
+      .float-left {
+        float: left;
+      }
+      .float-right {
+        float: right;
+      }
+      p {
+        border: 1px solid blue;
+      }
+      .clear {
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img class="float-left" src="../assets/images/2.jpg" alt="없음" />
+      <p>
+        팥빙수 조아팥빙수 조아팥빙수 조아팥빙수 조아팥빙수 조아 팥빙수
+        조아팥빙수 조아팥빙수 조아팥빙수 조아팥빙수 조아 팥빙수 조아팥빙수
+        조아팥빙수 조아팥빙수 조아팥빙수 조아
+      </p>
+
+      <p class="clear"> /*변경된 부분 */
+        활명수 조아 활명수 조아활명수 조아활명수 조아활명수 조아활명수 조아
+        활명수 조아활명수 조아활명수 조아활명수 조아활명수 조아활명수 조아
+        활명수 조아활명수 조아활명수 조아활명수 조아활명수 조아
+      </p>
+    </div>
+  </body>
+</html>
+```
+clear속성의 정의로 새로운 p태그는 기존의 float 속성의 영향에서 벗어날 수 있다.
+
+ 
+
+최근에는 float보다 flex box를 활용하는 편이라고 한다.
