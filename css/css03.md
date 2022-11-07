@@ -175,3 +175,57 @@ transition: 2s ease-in;
 /*2s 실행 시간 1s 지연 시간
 transition: 2s 1s ease-in;
 ```
+ 
+## 반응형 웹 만들기
+ </hr>
+
+반응형 웹 사이트 : 여러가지의 해상도에 반응해 각각에 맞는 최적의 화며늘 보여주는 홈페이지.
+ 
+### 뷰포트
+웹 브라우저에서 실제 내용이 표시되는 영역. 여러 환경에서 뷰포트 크기가 다르므로 반응형 웹에서는 뷰포트에 맞게 화면을 보여줘야 할 필요가 있다.
+ 
+#### 메타 뷰포트 태그 지정법
+```CSS
+ <meta name="viewport" content="속성1=값1, 속성2=값2......">
+```
+
+#### 메타 뷰포트 태그 속성
+* width - 가로
+* height - 세로
+* user-scalable - 사용자 확대/축소 가능 여부
+* initial-scale - 초기 화면 비율
+* maximum-scale - 최대 화면 비율
+* minimum-scale - 최소 화면 비율
+
+```CSS
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+#### 뷰포트 단위
+* vw : 1vw는 뷰포트 너비의 1%
+* vh : 1vh는 뷰포트 높이의 1%
+* vmin : 뷰포트 너비, 높이 중 작은 값의 1%
+* vmax : 뷰포트 너비, 높이 중  값의 1%
+ 
+ 
+### 미디어 쿼리
+접속하는 디바이스나 뷰포트에 따라 특정 CSS 스타일을 사용하는 방법
+
+#### 문법
+@media 키워드를 사용해 특정 미디어(디바이스)에서 어떤 CSS를 적용할 것인지 지정. 이때 그 특정 구간을 중단점(breakpoint)라고도 함.
+@media [only | not] 미디어 유형 [and 조건] * [and 조건]
+* only : 미디어 쿼리를 지원하지 않는 웹 브라우저에서는 미디어 쿼리를 무시하고 실행하지 않음.(거의 사용x)
+* not : not 다음 지정하는 미디어 유형 제외
+* and : 조건을 여러개 연결해서 추가하기
+
+예 : 미디어 유형이 screen이면서 최소 너비가 768px이고 최대 너비는 1439px일 경우에 적용할 CSS
+@media screen and (min-width: 768px) and (max-width: 1439px)
+ 
+#### 미디어 유형
+* all : 모든 장치에 적합
+* print : 인쇄, 출력 미리보기 화면에 표시중인 문서
+* screen : 주로 화면이 대상
+* speech : 음성 합성장치 대상
+ 
+#### 자주 사용하는 미디어 쿼리 조건
+* min-width : 웹 뷰포트의 최소 너비
+* max-width : 웹 뷰포트의 최대 너비
