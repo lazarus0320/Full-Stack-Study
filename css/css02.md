@@ -306,3 +306,168 @@ clear속성의 정의로 새로운 p태그는 기존의 float 속성의 영향�
  
 
 최근에는 float보다 flex box를 활용하는 편이라고 한다.
+ 
+ 
+## background 속성
+<hr/>
+
+### background-color
+해당 HTML요소의 배경색 설정.
+
+```CSS
+<style>
+	h1 {
+    		background-color : blue;
+        }
+    div {
+    		background-color : rgb(255, 0, 0);
+        }
+</style>
+ ```
+
+### background-image
+해당 HTML 요소의 배경으로 나타날 배경 이미지를 설정.
+
+설정된 배경 이미지는 기본 설정으로 HTML 요소 전체에 걸쳐 반복되어 나타남.
+```CSS
+<style>
+	.image {
+    background-image: url('../assets/images/cat.jpg');
+    }
+</style>
+ ```
+### background-repeat 
+배경 이미지를 수평이나 수직 방향으로 반복되도록 설정 가능.
+
+* background-repeat: repeat-x; (수평 반복)
+
+* background-repeat: repeat-y; (수직 반복)
+
+* background-repeat: no-repeat; (한 번만 나타나게)
+
+ 
+
+### background-position
+
+background-repeat: no-repeat; 일 때 (반복되는 이미지가 아닐 때)
+
+배경 이미지의 상대 위치를 설정.
+
+* left top
+* left center
+* left bottom
+* right top
+* right center
+* right bottom
+* center top
+* center center
+* center bottom
+또는 %, px로 입력 가능함.
+
+```CSS
+<style>
+	.image {
+    background-image: url('../assets/images/cat.jpg');
+    background-repeat: no-repeat;
+    background-position: top right;
+    }
+</style>
+ ```
+
+### background-attachment
+스크롤과 무관하게 배경 이미지를 화면 위치에 고정시킴.
+```CSS
+<style>
+	.image {
+    background-image: url('../assets/images/cat.jpg');
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-attachment: fixed;
+    }
+</style>
+ ```
+
+위의 속성을 한 번에 적용한 예
+```CSS
+<style>
+	.image {
+    background: blue url('../assets/images/cat.jpg') no-repeat top right fixed;
+    }
+</style>
+ 
+```
+ 
+
+ 
+
+### background-size
+배경 이미지의 크기 설정.
+
+cover : 이미지가 손상되지 않는 한도까지 크게 설정.
+```CSS
+<style>
+	.background-size {
+    	width: 300px;
+        height: 100px;
+        background-image: url('../assets/images/football.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border: 1px solid black;
+    }
+</style>
+ ```
+
+### 그라데이션
+* linear-gradient() : 선형 그라데이션. to로 방향을, deg로 각도를 지정
+* 
+```CSS
+background: linear-gradient(to bottom, white, blue);
+background: linear-gradient(45deg, white, blue);
+```
+
+* radial-gradient() : 타원형 그라데이션
+* radial-gradient(circle) : 정원
+```CSS
+background: radial-gradient(circle at 20% 20%, white, yellow, red);
+ ```
+
+예시 코드
+
+```CSS
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .linear {
+        width: 500px;
+        height: 200px;
+        border: 1px solid red;
+        background: linear-gradient(to right, red 50%, blue 80%, yellow 100%);
+      }
+      .radial {
+        width: 500px;
+        height: 200px;
+        border: 1px solid blue;
+        background: radial-gradient(
+          circle at 10% 50%,
+          white,
+          yellow,
+          red,
+          blue
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <h3>linear-gradient</h3>
+    <div class="linear"></div>
+    <h3>radial-gradient</h3>
+    <div class="radial"></div>
+  </body>
+</html>
+```
