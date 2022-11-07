@@ -117,3 +117,61 @@ html 요소의 특정 부분만 선택
   </body>
 </html>
 ```
+ 
+## transform, transition
+<hr/>
+ 
+### transfrom
+html요소의 회전, 크기 조절, 기울이기, 이동 효과
+
+! 해당 요소의 display 속성이 block이나 inline-block일 경우 가능함.
+
+* translate(tx, ty) - 지정한 크기만큼 x축, y축으로 이동함.
+* translate(tx, ty) - tx, ty만큼 이동.
+* translateX(tx) - tx만큼 x축 이동
+* translateY(ty) - ty만큼 y축 이동
+* scale(sx, sy) - x축 y축으로 확대, 축소
+* scaleX(sx) - x축으로 확대 축소
+* scaleY(sy) - y축으로 확대 축소
+* rotate(각도) - 지정한 각도만큼 회전. +시계, -반시계
+* rotateX(각도) - x축 기준으로 회전. 입체감 있게 표현하려면 perspective 속성을 부모 요소에 적용.
+* rotateY(각도) - y축 기준으로 회전. 입체감 있게 표현하려면 perspective 속성을 부모 요소에 적용.
+* rotateZ(각도) - z축 기준으로 회전. 입체감 있게 표현하려면 perspective 속성을 부모 요소에 적용.
+* skew(ax, ay) - 지정한 각도만큼 x축 y축으로 왜곡.
+* skew(ax) - 지정한 각도만큼 x축으로 왜곡.
+* skew(ay) - 지정한 각도만큼 y축으로 왜곡.
+ 
+ ```CSS
+/* x축 20px 이동 */
+transform translateX(20px);
+
+/* y축 20px 이동 */
+transform translateY(40px);
+
+/* x축으로 20px, y축으로 40px 이동 */
+transform translateY(20px, 40px);
+ ```
+
+### transition
+속성 값이 변할 때 더욱더 부드럽게 전환할 수 있도록 도와줌.
+ 
+transition-property: <속성1>, <속성2>; 와 같이 지정 가능.
+ 
+* all - 모든 속성 지정.(생략 가능)
+* none - 아무것도 지정하지 않음.
+* transition-duration - 트랜지션 효과를 몇 초 동안 실행할 것인지 지정함.
+* transition-delay - 지정한 초만큼 기다렸다가 실행할 때 사용
+
+transition-timing-function - 트랜지션이 끝날때의 속도를 지정.
+
+* linear - 시작과 끝의 속도를 일정하게
+* ease-in - 천천히 시작했다가 완료될 때 속도 증가
+* ease-out - 빨리 시작했다가 완료될 때 속도가 낮아짐.
+
+ ```CSS
+transition: all 2s ease-in;
+
+transition: 2s ease-in;
+/*2s 실행 시간 1s 지연 시간
+transition: 2s 1s ease-in;
+```
