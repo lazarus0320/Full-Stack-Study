@@ -420,7 +420,6 @@ cover : 이미지가 손상되지 않는 한도까지 크게 설정.
 
 ### 그라데이션
 * linear-gradient() : 선형 그라데이션. to로 방향을, deg로 각도를 지정
-* 
 ```CSS
 background: linear-gradient(to bottom, white, blue);
 background: linear-gradient(45deg, white, blue);
