@@ -129,6 +129,110 @@ console.log(1 === 1); //true
 console.log(1 === "1"); //false
 console.log(undefined === null); //false
 ```
+# try-catch
 
+try문에서 예외 발생 인식
+예외 발생시 catch 블록 실행
+finally 블록은 예외 발생과 관계없이 실행
+```javascript
+var value;
+try{
+	value = ball;
+} catch(error){
+	console.log("에러 발생");
+} finally {
+	console.log("무조건 실행");
+}
+//에러 발생
+//무조건 발생
+```
 
+# Strict 모드
+형태 : "use strict"
+엄격하게 JS 문법 사용 선언
+작성한 위치부터 적용됨.
+ES5부터 지원
 
+```javascript
+//변수의 타입(var, let, const)이 작성되지 않은 형태
+book = "책";
+console.log(book);//책
+
+"use strict"
+try{
+	book = "변수 선언하지 않음";
+	console.log(book);
+} catch(error){
+	console.log(error.message);
+}
+```
+
+# 함수
+특정 기능을 처리하는 자바스크립트 코드 묶음
+
+형태
+```javascript
+function add(a, b) {
+ console.log(a+b);
+};
+add(1,2); // 3
+```
+ 
+* 규칙
+ * 첫 문자
+  - 영문자, $, _ 사용가능
+  - 숫자나 다른 기호 사용 불가
+ * 이름 관례
+  - 동사로 시작. 코드를 읽지않아도 의미를 알 수 있도록.
+  - 두개 이상의 단어 사용시 : 두 번째 단어부터 명사 사용
+  - 명사의 첫 문자를 대문자로 사용 CamelCase 형태
+  - 동사 + 명사 형태로 동적인 모습.
+
+# 프로퍼티(Property)
+형태 -> {name: value}
+name에 프로퍼티 이름(key)를 작성. key에 따옴표 작성 생략
+```javascript
+{ a: 123, b: "ABC", c: true, d: {} }
+{ book: function () {코드} }
+```
+
+## 프로퍼티 추가, 변경
+```javascript
+var obj = {};
+obj.abc = 123;
+obj["def"] = 456;
+var key = "def";
+console.log(obj[key]); // 456
+```
+obj 오브젝트에 프로퍼티 이름으로 abc가 있으면 value값이 123으로 변경되고,<br>
+없으면 abc: 123 프로퍼티가 추가됨.
+
+## 프로퍼티 값 추출
+```javascript
+var obj = {book: "책"}
+var value = obj.book;
+console.log(value); // 책
+console.log(obj.book); // 책
+console.log(obj.price); // undefined (이름이 없는 경우 반환됨)
+```
+
+## for~in문 활용한 프로퍼티 값 추출
+
+* 형태<br>
+ for(변수 in 오브젝트) 문장<br>
+ for(표현식 in 오브젝트)문장<br>
+* for(var item in sportc){코드}
+ 프로퍼티 이름이 item에 설정
+ sports[item]으로 프로퍼티 값을 구함
+ 프로퍼티를 작성한 순서대로 읽혀진다는 것을 보장하지 않음.
+
+```javascript
+var sports = {
+ soccer: "축구",
+ baseball: "야구"
+}
+for(var item in sports){
+ console.log(item); // soccer baseball
+ console.log(sports[item]); // 축구 야
+}
+```
