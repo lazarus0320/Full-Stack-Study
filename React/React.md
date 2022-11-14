@@ -21,6 +21,7 @@ http://localhost:3000로 이동하면 개발환경 버전이 아니라 실제 �
 
 React : 사용자 정의 태그를 만드는 방식.
 사용자 정의 태그를 만드는 예시
+* 함수로 묶고, 스크립트는 return()안에다 적고, 함수 첫글자는 대문자로.
 [App.js]
 ```javascript
 import logo from './logo.svg';
