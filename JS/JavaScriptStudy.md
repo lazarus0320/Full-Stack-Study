@@ -32,15 +32,16 @@ console.log(typeof book); //string
 
 * 부호를(-, +)를 가진 값
 * Number 타입의 특수한 3개값
-	NaN: Not-a-Number 숫자가 아닌 것을 나타내는 값.
+	1. NaN: Not-a-Number 숫자가 아닌 것을 나타내는 값.
 	 ```javascript
 	 var point = 1 * "A";
 	 console.log(point); // NaN
 	 ```
- 	infinity : 양수 무한대
- 	-infinity : 음수 무한대
+ 	2. infinity : 양수 무한대
+ 	3. -infinity : 음수 무한대
 	
 <hr/>
+
 # String 타입
 "" 또는 ''사이에 값을 작성
  * 큰 따옴표와 작은 따옴표 같이 사용시
