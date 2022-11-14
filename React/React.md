@@ -173,54 +173,53 @@ export default App;
 ## 이벤트
 컴포넌트 사용자가 Header 컴포넌트를 클릭할 때 어떤 작업을 하는 가를 정의한다.
 ```javascript
+import logo from './logo.svg';
+import './App.css';
+import { useState } from 'react';
+
 function Header(props) {
   console.log('props', props, props.title);
   return (
-    // html 코드
     <header>
       <h1>
-        <a href="/" onClick={function (event) {
-            event.preventDefault(); // 클릭해도 리로드가 일어나지 않게 함
-            props.onChangeMode(); // App 컴포넌트 <Header 태그의 onchangeMode 내부 함수를 호
-        }}>{props.title}
+        <a
+          href="/"
+          onClick={(event) => {
+            event.preventDefault(); // 클릭할 때 리로드되는 것을 방지하는 함수
+            props.onChangeMode(); // 아래에서 지정했던 함수를 
+          }}
+        >
+          {props.title}
         </a>
       </h1>
     </header>
   );
 }
-
-...
-
-function App() {
-  const topics = [
-    // 객체 사용
-    { id: 1, title: 'html', body: 'html is ...' },
-    { id: 2, title: 'css', body: 'css is ...' },
-    { id: 3, title: 'js', body: 'js is ...' },
-  ];
+function Nav(props) {
+  const lis = [];
+  for (let i = 0; i < props.topics.length; i++) {
+    let t = props.topics[i];
+    lis.push(
+      <li key={t.id}>
+        <a
+          id={t.id}
+          href={'/read/' + t.id}
+          onClick={(event) => {
+            event.preventDefault();
+            props.onChangeMode(event.target.id); // target : 이벤트를 유발시킨 태그를 가리킴. 여기서는 a태그가 됨.
+          }}
+        >
+          {t.title}
+        </a>
+      </li>
+    );
+  }
   return (
-    <div>
-      <Header title="WEB" onChangeMode={function () {
-        alert('Header');
-        }}>
-      </Header>
-      <Nav topics={topics}></Nav>
-      <Article title="Welcome" body="Hello, WEB"></Article>
-    </div>
+    <nav>
+      <ol>{lis}</ol>
+    </nav>
   );
 }
-```
-
-
-## state, crud(추가 및 수정 예정)
-prop이 입력이라면 return이 새롭게 만들어지는 UI로 볼 수 있다.
-컴포넌트 값을 다시실행해서 새로운 return값을 만들어주는 것을 state라고 한다. (컴포넌트를 만드는 내부자를 위한 데이터)
-
-```javascript
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
-
 function Article(props) {
   return (
     <article>
@@ -229,14 +228,140 @@ function Article(props) {
     </article>
   );
 }
+function App() {
+  const topics = [
+    { id: 1, title: 'html', body: 'html is ...' },
+    { id: 2, title: 'css', body: 'css is ...' },
+    { id: 3, title: 'javascript', body: 'javascript is ...' },
+  ];
+  return (
+    <div>
+      <Header
+        title="WEB"
+        onChangeMode={() => {
+          //이 컴포넌트를 클릭할 때 실행되는 함수를 설정
+          alert('Header');
+        }}
+      ></Header>
+      <Nav
+        topics={topics}
+        onChangeMode={(id) => {
+          alert(id);
+        }}
+      ></Nav>
+      <Article title="Welcome" body="Hello, WEB"></Article>
+    </div>
+  );
+}
+
+export default App;
+```
+
+
+## state, crud(추가 및 수정 예정)
+prop이 입력이라면 return이 새롭게 만들어지는 UI로 볼 수 있다.
+컴포넌트 값을 다시실행해서 새로운 return값을 만들어주는 것을 state라고 한다. (컴포넌트를 만드는 내부자를 위한 데이터)
+
+mode의 값이 무엇이냐에 따라서 본문의 내용을 다르게 만드려고 한다.
+```javascript
+function App() {
+  const mode = 'WELCOME'; // mode값이 무엇인지에 따라 content에 다른 값을 부여하려고 한다.
+  const topics = [
+    { id: 1, title: 'html', body: 'html is ...' },
+    { id: 2, title: 'css', body: 'css is ...' },
+    { id: 3, title: 'javascript', body: 'javascript is ...' },
+  ];
+  let content = null;
+  if (mode === 'WELCOME') {
+    content = <Article title="Welcome" body="Hello, WEB"></Article>;
+  } else if (mode === 'READ') {
+    content = <Article title="Read" body="Hello, Read"></Article>;
+  }
+  return (
+    <div>
+      <Header
+        title="WEB"
+        onChangeMode={() => {
+          //이 컴포넌트를 클릭할 때 실행되는 함수를 설정
+          mode = 'WELCOME';
+        }}
+      ></Header>
+      <Nav
+        topics={topics}
+        onChangeMode={(id) => {
+          mode = 'READ';
+        }}
+      ></Nav>
+      {content}
+    </div>
+  );
+}
+
+export default App;
+```
+하지만 이 코드를 실행시키고 각각의 링크를 눌러도 별 반응을 보이지는 않는다.<br>
+mode값이 바뀌더라도 App 컴포넌트 함수가 새로 실행되지는 않기 때문이다.<br>
+이때 사용하는 것이 바로 state이다. 컴포넌트 함수를 새로 실행시키고 UI에 반영되도록 도와줄 것이다.<br>
+
+import { useState } from 'react'; 를 추가한다.
+useState라는 hook은 리액트에서 기본적으로 제공된다.
+
+```javascript
+function App() {
+  // const _mode = useState('WELCOME'); // useState의 인자는 그 state의 초기값
+  // const mode = _mode[0]; // useState의 상태값을 읽는 방법
+  // const setMode = _mode[1]; // state를 바꿀때는 1번째 인덱스값(함수값이 있음)으로 바꿈.
+  const [mode, setMode] = useState('WELCOME'); // 위의 세 줄과 같음
+
+  const topics = [
+    { id: 1, title: 'html', body: 'html is ...' },
+    { id: 2, title: 'css', body: 'css is ...' },
+    { id: 3, title: 'javascript', body: 'javascript is ...' },
+  ];
+  let content = null;
+  if (mode === 'WELCOME') {
+    content = <Article title="Welcome" body="Hello, WEB"></Article>;
+  } else if (mode === 'READ') {
+    content = <Article title="Read" body="Hello, Read"></Article>;
+  }
+  return (
+    <div>
+      <Header
+        title="WEB"
+        onChangeMode={() => {
+          //이 컴포넌트를 클릭할 때 실행되는 함수를 설정
+          setMode('WELCOME'); // state값을 바꾼다
+        }}
+      ></Header>
+      <Nav
+        topics={topics}
+        onChangeMode={(id) => {
+          setMode('READ');
+        }}
+      ></Nav>
+      {content}
+    </div>
+  );
+}
+
+export default App;
+```
+리스트의 링크들을 클릭할 경우 title과 body의 내용도 state로 드변경시키는 코드
+
+```javascript
+import logo from './logo.svg';
+import './App.css';
+import { useState } from 'react';
+
 function Header(props) {
+  console.log('props', props, props.title);
   return (
     <header>
       <h1>
         <a
           href="/"
           onClick={(event) => {
-            event.preventDefault();
+            event.preventDefault(); // 클릭해도 리로드 방지
             props.onChangeMode();
           }}
         >
@@ -257,8 +382,8 @@ function Nav(props) {
           href={'/read/' + t.id}
           onClick={(event) => {
             event.preventDefault();
-            props.onChangeMode(Number(event.target.id));
-          }}
+            props.onChangeMode(Number(event.target.id)); // target : 이벤트를 유발시킨 태그를 가리킴. 여기서는 a태그가 됨.
+          }}  //Number로 포맷팅 시키는 이유는 t.id가 id 태그에 들어가면서 문자열이 되었기 때문. 
         >
           {t.title}
         </a>
@@ -271,84 +396,27 @@ function Nav(props) {
     </nav>
   );
 }
-function Create(props) {
+function Article(props) {
   return (
     <article>
-      <h2>Create</h2>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          const title = event.target.title.value;
-          const body = event.target.body.value;
-          props.onCreate(title, body);
-        }}
-      >
-        <p>
-          <input type="text" name="title" placeholder="title" />
-        </p>
-        <p>
-          <textarea name="body" placeholder="body"></textarea>
-        </p>
-        <p>
-          <input type="submit" value="Create"></input>
-        </p>
-      </form>
-    </article>
-  );
-}
-function Update(props) {
-  const [title, setTitle] = useState(props.title);
-  const [body, setBody] = useState(props.body);
-  return (
-    <article>
-      <h2>Update</h2>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          const title = event.target.title.value;
-          const body = event.target.body.value;
-          props.onUpdate(title, body);
-        }}
-      >
-        <p>
-          <input
-            type="text"
-            name="title"
-            placeholder="title"
-            value={title}
-            onChange={(event) => {
-              setTitle(event.target.value);
-            }}
-          />
-        </p>
-        <p>
-          <textarea
-            name="body"
-            placeholder="body"
-            value={body}
-            onChange={(event) => {
-              setBody(event.target.value);
-            }}
-          ></textarea>
-        </p>
-        <p>
-          <input type="submit" value="Update"></input>
-        </p>
-      </form>
+      <h2>{props.title}</h2>
+      {props.body}
     </article>
   );
 }
 function App() {
-  const [mode, setMode] = useState('WELCOME');
+  // const _mode = useState('WELCOME'); // useState의 인자는 그 state의 초기값
+  // const mode = _mode[0]; // useState의 상태값을 읽는 방법
+  // const setMode = _mode[1]; // state를 바꿀때는 1번째 인덱스값(함수값이 있음)으로 바꿈.
+  const [mode, setMode] = useState('WELCOME'); // 위의 세 줄과 같음
   const [id, setId] = useState(null);
-  const [nextId, setNextId] = useState(4);
-  const [topics, setTopics] = useState([
+
+  const topics = [
     { id: 1, title: 'html', body: 'html is ...' },
     { id: 2, title: 'css', body: 'css is ...' },
     { id: 3, title: 'javascript', body: 'javascript is ...' },
-  ]);
+  ];
   let content = null;
-  let contextControl = null;
   if (mode === 'WELCOME') {
     content = <Article title="Welcome" body="Hello, WEB"></Article>;
   } else if (mode === 'READ') {
@@ -361,85 +429,13 @@ function App() {
       }
     }
     content = <Article title={title} body={body}></Article>;
-    contextControl = (
-      <>
-        <li>
-          <a
-            href={'/update/' + id}
-            onClick={(event) => {
-              event.preventDefault();
-              setMode('UPDATE');
-            }}
-          >
-            Update
-          </a>
-        </li>
-        <li>
-          <input
-            type="button"
-            value="Delete"
-            onClick={() => {
-              const newTopics = [];
-              for (let i = 0; i < topics.length; i++) {
-                if (topics[i].id !== id) {
-                  newTopics.push(topics[i]);
-                }
-              }
-              setTopics(newTopics);
-              setMode('WELCOME');
-            }}
-          />
-        </li>
-      </>
-    );
-  } else if (mode === 'CREATE') {
-    content = (
-      <Create
-        onCreate={(_title, _body) => {
-          const newTopic = { id: nextId, title: _title, body: _body };
-          const newTopics = [...topics];
-          newTopics.push(newTopic);
-          setTopics(newTopics);
-          setMode('READ');
-          setId(nextId);
-          setNextId(nextId + 1);
-        }}
-      ></Create>
-    );
-  } else if (mode === 'UPDATE') {
-    let title,
-      body = null;
-    for (let i = 0; i < topics.length; i++) {
-      if (topics[i].id === id) {
-        title = topics[i].title;
-        body = topics[i].body;
-      }
-    }
-    content = (
-      <Update
-        title={title}
-        body={body}
-        onUpdate={(title, body) => {
-          console.log(title, body);
-          const newTopics = [...topics];
-          const updatedTopic = { id: id, title: title, body: body };
-          for (let i = 0; i < newTopics.length; i++) {
-            if (newTopics[i].id === id) {
-              newTopics[i] = updatedTopic;
-              break;
-            }
-          }
-          setTopics(newTopics);
-          setMode('READ');
-        }}
-      ></Update>
-    );
   }
   return (
     <div>
       <Header
         title="WEB"
         onChangeMode={() => {
+          //이 컴포넌트를 클릭할 때 실행되는 함수를 설정
           setMode('WELCOME');
         }}
       ></Header>
@@ -451,20 +447,6 @@ function App() {
         }}
       ></Nav>
       {content}
-      <ul>
-        <li>
-          <a
-            href="/create"
-            onClick={(event) => {
-              event.preventDefault();
-              setMode('CREATE');
-            }}
-          >
-            Create
-          </a>
-        </li>
-        {contextControl}
-      </ul>
     </div>
   );
 }
