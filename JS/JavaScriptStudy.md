@@ -236,3 +236,47 @@ for(var item in sports){
  console.log(sports[item]); // 축구 야
 }
 ```
+
+# 빌트인
+## 개요
+* 값 타입, 연산자, 오브젝트를 JS코드를 처리하는 영역에 사전에 만들어 놓는 것.
+
+## 장점
+* 사전 처리를 하지 않고 즉시 사용가능
+* 자바스크립트 특징
+
+## 빌트인 값 타입
+* Undefined, Null, Boolean, Number, String, Object
+
+## 빌트인 연산자
+* +, -, *, /, %, ++, --, new 등
+
+# 빌트인 오브젝트 유형
+
+1. Number Object
+	* 123과 같은 숫자, 상수, 지수
+2. String Object
+	* "abc"와 같은 문자열, 분리, 연결
+3. Boolean Object
+	* true, false
+4. Object Object
+	* {key: value} 형태로 프로퍼티를 처리하기 위한 형태
+5. Array Object
+	* [1, 2, "A", "ABC"]형태
+6. Function Object
+	* function abc(){} 형태
+7. Math Object
+	* abs(), round()등의 수학계산
+8. Date Object
+	* 연월일, 시분초
+9. JSON Object
+	* [{"name":"value"}] 형태, 서버와 데이터 송수신에 사용
+10. RegExp Object
+	* ^, $와 같은 정규표현식
+11. 글로벌(Global) Object
+	* 소스파일 전체에서 하나만 존재합니다.
+	⇒ 전역적으로 사용되기에 인스턴스를 생성하는것이아닌 그대로 사용하는 것
+	* 모든 코드에서 공유, 접근 가능
+	* 전역 객체라고도 하며, 뉘앙스에 차이가 있다.
+
+
