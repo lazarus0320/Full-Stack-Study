@@ -59,6 +59,7 @@ var value = "123";
 console.log(typeof value);// string;
 ```
 <hr/>
+
 # null undefined 차이점
 * undefined는 단지 변수만 선언하면 default로 선언된다.
 * null은 강제로 할당해야 값이 null이 된다.
@@ -70,10 +71,12 @@ var point;
 console.log(point);// point
 ```
 <hr/>
+
 # Boolean 타입
 진리값 : true, false
 
 <hr/>
+
 # Object 타입
 {name: value} 형태
 ```javascript
@@ -84,6 +87,7 @@ property : name과 value하나를 지칭.
 Object는 property의 집합.
 
 <hr/>
+
 # 숫자로 변환
 연산전에 우선 숫자로 변환하고 연산한다.
 Undefined: NaN
@@ -105,6 +109,7 @@ console.log(123 - "23");//100   ---(3)
 ⇒ (3):  산술더하기를 제외한 나머지 산술연산자는 숫자로 변환하여 연산합니다. 
 
 <hr/>
+
 # 단항 연산자
 
 형태 +value
@@ -130,6 +135,7 @@ console.log(value);//7
 ```
 
 <hr/>
+
 # ===연산자 !==연산자
 ===는 양쪽 값과 타입이 모두 같으면 true, 값 또는 타입이 다르면 false
 반대의 경우가 !==
