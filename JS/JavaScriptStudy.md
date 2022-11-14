@@ -12,6 +12,8 @@ console.log(0.12+5); // 5.12
   * 정수와 실수를 구분하는 언어에서는 0.12 + 5연산이 불가능하나
   * JS에서는 정수와 실수를 구분하지 않고 실수로 계산된다.
 
+<hr/>
+
 # 데이터 타입
 ## typeof 연산자
 * 데이터(값) 타입 반환
@@ -23,6 +25,8 @@ var book = "책";
 console.log(typeof book); //string
 ```
 
+<hr/>
+
 # Number 타입
 시맨틱: 의미를 부여하여 변수 이름을 작명하는 것
 
@@ -33,11 +37,12 @@ console.log(typeof book); //string
  var point = 1 * "A";
  console.log(point); // NaN
  ```
- infinity : 양수 무한대
- -infinity : 음수 무한대
+ * infinity : 양수 무한대
+ * -infinity : 음수 무한대
  
- # String 타입
- "" 또는 ''사이에 값을 작성
+<hr/>
+# String 타입
+"" 또는 ''사이에 값을 작성
  * 큰 따옴표와 작은 따옴표 같이 사용시
  ```javascript
  var value = "책, '123'";
@@ -52,7 +57,7 @@ console.log(value); // 책, '123'
 var value = "123";
 console.log(typeof value);// string;
 ```
-
+<hr/>
 # null undefined 차이점
 * undefined는 단지 변수만 선언하면 default로 선언된다.
 * null은 강제로 할당해야 값이 null이 된다.
@@ -63,10 +68,11 @@ console.log(typeof value);// string;
 var point; 
 console.log(point);// point
 ```
-
+<hr/>
 # Boolean 타입
 진리값 : true, false
 
+<hr/>
 # Object 타입
 {name: value} 형태
 ```javascript
@@ -76,7 +82,7 @@ console.log(book);//{title:책, point: 1000}
 property : name과 value하나를 지칭.
 Object는 property의 집합.
 
-
+<hr/>
 # 숫자로 변환
 연산전에 우선 숫자로 변환하고 연산한다.
 Undefined: NaN
@@ -97,6 +103,7 @@ console.log(123 - "23");//100   ---(3)
 ⇒ (2): 산술 더하기 연산자의 경우 값이 숫자라도 타입이 String이면 문자열로 연결합니다. 
 ⇒ (3):  산술더하기를 제외한 나머지 산술연산자는 숫자로 변환하여 연산합니다. 
 
+<hr/>
 # 단항 연산자
 
 형태 +value
@@ -121,6 +128,7 @@ console.log(8 + -value);// 1
 console.log(value);//7
 ```
 
+<hr/>
 # ===연산자 !==연산자
 ===는 양쪽 값과 타입이 모두 같으면 true, 값 또는 타입이 다르면 false
 반대의 경우가 !==
@@ -129,6 +137,8 @@ console.log(1 === 1); //true
 console.log(1 === "1"); //false
 console.log(undefined === null); //false
 ```
+
+<hr/>
 # try-catch
 
 try문에서 예외 발생 인식
@@ -146,7 +156,7 @@ try{
 //에러 발생
 //무조건 발생
 ```
-
+<hr/>
 # Strict 모드
 형태 : "use strict"
 엄격하게 JS 문법 사용 선언
@@ -167,6 +177,7 @@ try{
 }
 ```
 
+<hr/>
 # 함수
 특정 기능을 처리하는 자바스크립트 코드 묶음
 
@@ -188,6 +199,7 @@ add(1,2); // 3
   - 명사의 첫 문자를 대문자로 사용 CamelCase 형태
   - 동사 + 명사 형태로 동적인 모습.
 
+<hr/>
 # 프로퍼티(Property)
 형태 -> {name: value}
 name에 프로퍼티 이름(key)를 작성. key에 따옴표 작성 생략
@@ -236,7 +248,7 @@ for(var item in sports){
  console.log(sports[item]); // 축구 야
 }
 ```
-
+<hr/>
 # 빌트인
 ## 개요
 * 값 타입, 연산자, 오브젝트를 JS코드를 처리하는 영역에 사전에 만들어 놓는 것.
@@ -251,6 +263,7 @@ for(var item in sports){
 ## 빌트인 연산자
 * +, -, *, /, %, ++, --, new 등
 
+<hr/>
 # 빌트인 오브젝트 유형
 
 1. Number Object
