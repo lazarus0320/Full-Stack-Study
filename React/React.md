@@ -570,3 +570,111 @@ setTopics에 변경값인 newTopics를 넣어준다.
 이제 Create를 누르고 값을 추가해서 submit를 클릭하면 입력한 값이
 새로운 항목으로 추가되는 것을 확인할 수 있다. 
 
+<hr/>
+# Update
+
+App 컨테이너 하단부를 다음과 같이 변경한다.
+```javascript
+<ul>
+...
+      <ul>
+        <li>
+          <a
+            href="/create"
+            onClick={(event) => {
+              event.preventDefault();
+              setMode('CREATE');
+            }}
+          >
+            Create
+          </a>
+        </li>
+      </ul>
+
+      <li>
+        <a href="/update">Update</a>
+      </li>
+    </div>
+      ```
+update 링크를 mode가 read상태일때만 나타나도록 변경하고자 한다.
+
+```javascript
+function App() {
+
+  let content = null;
+  let contextControl = null;  //추가
+
+  if (mode === 'WELCOME') {
+    content = <Article title="Welcome" body="Hello, WEB"></Article>;
+  } else if (mode === 'READ') {
+    let title,
+      body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+      }
+    }
+    content = <Article title={title} body={body}></Article>;
+    ======================// contextControl 추가
+    contextControl = (
+      <li>
+        <a href={"/update"+id}>Update</a>
+      </li>
+    );
+    ===================//
+  } else if (mode === 'CREATE') {
+    content = (
+      <Create
+        onCreate={(_title, _body) => {
+          const newTopic = { id: nextId, title: _title, body: _body };
+          const newTopics = [...topics];
+          newTopics.push(newTopic);
+          setTopics(newTopics);
+          setMode('READ');
+          setId(nextId);
+          setNextId(nextId + 1);
+        }}
+      ></Create>
+    );
+  }
+  return (
+    <div>
+      <Header
+        title="WEB"
+        onChangeMode={() => {
+          //이 컴포넌트를 클릭할 때 실행되는 함수를 설정
+          setMode('WELCOME');
+        }}
+      ></Header>
+      <Nav
+        topics={topics}
+        onChangeMode={(_id) => {
+          setMode('READ');
+          setId(_id);
+        }}
+      ></Nav>
+      {content}
+      <ul>
+        <li>
+          <a
+            href="/create"
+            onClick={(event) => {
+              event.preventDefault();
+              setMode('CREATE');
+            }}
+          >
+            Create
+          </a>
+        </li>
+        {contextControl}  <========== 변경
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+
+```
+mode가 READ 상태일때만 Update링크가 나타나도록 변경되었다.
+
