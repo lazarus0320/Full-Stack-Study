@@ -453,3 +453,120 @@ function App() {
 
 export default App;
 ```
+
+
+#Create
+App function 하단부에 다음 코드를 추가한다.
+```javascript
+<a
+        href="/create"
+        onClick={(event) => {
+          event.preventDefault();
+          setMode('CREATE');
+        }}
+      >
+        Create
+      </a>
+    </div>
+```
+Create라는 이름의 링크가 생성되고, 클릭할시 setMode값을 CREATE로 변경한다.
+
+Create function을 추가한다.
+```javascript
+function Create() {
+  //sumbit버튼을 누를 때 실행되는 함수
+  return (
+    <article>
+      <h2>Create</h2>
+      <form onSubmit={(event) => {
+          event.preventDefault();
+          const title = event.target.title.value;
+          const body = event.target.body.value;
+          props.onCreate(title, body);
+          }}
+       >
+        <p>
+          <input type="text" name="title" placeholder="title" />
+        </p>
+        <p>
+          <textarea name="body" placeholder="body"></textarea>
+        </p>
+        <p>
+          <input type="submit" value="Create"></input>
+        </p>
+      </form>
+    </article>
+  );
+}
+```
+onSubmit 함수는 submit타입 버튼을 누를 때 작동되는 함수이다.
+빈칸으로 만들어두면 그냥 페이지가 리로드된다.
+event.preventDefault();를 넣으면 페이지 리로드를 막을 수 있다.
+
+event.target은 콜백함수를 감싸는 태그, 즉, form태그이므로
+form태그의 title.value값은 아래에 있는 input태그의 title 값을 가리킨다.
+
+probs.onCreate(title, body)를 통해 Create 컨테이너 내부에 존재하는
+title, body값을 App 컨테이너의 Create 태그에 포함된 onCreate함수로 내보낸다.
+이러한 방식으로 사용자가 입력한 title값과 body값을 Create 컴포넌트를 통해 공급받는 것이다.
+
+지금까지 구동 순서를 정리하면 다음과 같다.
+
+1. App 컨테이너의 onClick 메서드를 통해 Create링크를 클릭하면 setMode('CREATE')의 실행으로 App 컨테이너의 mode값이 Create로 변경된다.
+2. 동시에  <Create onCreate={(title, body) => {
+  }</Create>가 실행되고 Create 컴포넌트 메서드를 실행시킨다.
+3. 사용자가 title과 body값을 입력하고 submit 버튼을 클릭할 경우
+  form 태그의 onSubmit 메서드가 실행되고 입력한 값이
+  App 컴포넌트의 <Create onCreate={(title, body) => { }</Create>로 받아와지는 것이다.
+  
+
+App으로 돌아가서 topics 부분을 보자.
+사용자가 입력한 두 값이 4번째 id값으로 추가되어야 한다.
+const로 선언된 topics를 useState 형태로 승격시킨다.
+```javascript
+function App() {
+...
+  const [mode, setMode] = useState('WELCOME');
+  const [id, setId] = useState(null);
+  const [nextId, setNextId] = useState(4); // 추가된 부분
+  const [topics, setTopics] = useState([  // 바뀐 부분
+    { id: 1, title: 'html', body: 'html is ...' },
+    { id: 2, title: 'css', body: 'css is ...' },
+    { id: 3, title: 'javascript', body: 'javascript is ...' },
+  ]);
+...
+```
+topics는 읽기용, setTopics는 쓰기용 이름이다.
+
+id값이 4번부터 추가되어야하므로 const[nextId, setNextId] = useState(4);를 추가했다.
+
+App 컨테이너의 mode==='Create' 부분을 다음과 같이 변경한다.
+```javascript
+else if (mode === 'CREATE') {
+    content = (
+      <Create
+        onCreate={(_title, _body) => {
+          const newTopic = { id: nextId, title: _title, body: _body };
+          const newTopics = [...topics];
+          newTopics.push(newTopic);
+          setTopics(newTopics);
+          setMode('READ');
+          setId(nextId);
+          setNextId(nextId+1);
+        }}
+      ></Create>
+    );
+  }
+```
+topics는 기존의 맵 형태로 이루어진 데이터 값의 모음이다.
+newTopic은 추가할 항목,
+newTopics는 [...topics]의 형태로 topics의 복제본을 할당받는다.
+그리고 newTopics에 새로운 항목인 newTopic을 push하고
+setTopics에 변경값인 newTopics를 넣어준다.
+
+*왜 원본에다가 추가한 값을 변경값으로 넣지 않고 복제한 값에다 추가한 값을
+변경값으로 넣는가? -> 리액트에서는 set...(변경값)을 호출했을 때 새로 들어온 데이터가 원본 데이터와 같은 경우 굳이 컴포넌트를 새로 랜더링하지 않기 때문이다. 
+
+이제 Create를 누르고 값을 추가해서 submit를 클릭하면 입력한 값이
+새로운 항목으로 추가되는 것을 확인할 수 있다. 
+
