@@ -768,3 +768,56 @@ function App() {
   ...
 
 ```
+
+<hr/>
+
+# Delete
+
+mode가 READ일 경우, delete기능을 담은 버튼을 만들고자 한다.
+App 컴포넌트에 다음과 같은 코드를 추가한다.
+```javascript
+...
+if (mode === 'WELCOME') {
+    content = <Article title="Welcome" body="Hello, WEB"></Article>;
+  } else if (mode === 'READ') {
+    let title,
+      body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+      }
+    }
+    content = <Article title={title} body={body}></Article>;
+    contextControl = (
+      <>
+        <li>
+          <a
+            href={'/update/' + id}
+            onClick={(event) => {
+              event.preventDefault();
+              setMode('UPDATE');
+            }}
+          >
+            Update
+          </a>
+        </li>
+        <li>
+          <input
+            type="button"
+            value="Delete"
+            onClick={() => {
+              const newTopics = [];
+              for (let i = 0; i < topics.length; i++) {
+                if (topics[i].id !== id) {
+                  newTopics.push(topics[i]);
+                }
+              }
+              setTopics(newTopics);
+              setMode('WELCOME');
+            }}
+          />
+        </li>
+      </>
+    );
+
