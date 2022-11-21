@@ -571,6 +571,7 @@ setTopics에 변경값인 newTopics를 넣어준다.
 새로운 항목으로 추가되는 것을 확인할 수 있다. 
 
 <hr/>
+
 # Update
 
 App 컨테이너 하단부를 다음과 같이 변경한다.
@@ -678,3 +679,92 @@ export default App;
 ```
 mode가 READ 상태일때만 Update링크가 나타나도록 변경되었다.
 
+최종적으로 update기능을 구현하는 코드는 다음과 같다.
+```javascript
+import logo from './logo.svg';
+import './App.css';
+import { useState } from 'react';
+
+...
+
+
+function Update(props) {
+  const [title, setTitle] = useState(props.title);
+  const [body, setBody] = useState(props.body);
+  return (
+    <article>
+      <h2>Update</h2>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          const title = event.target.title.value;
+          const body = event.target.body.value;
+          props.onUpdate(title, body);
+        }}
+      >
+        <p>
+          <input
+            type="text"
+            name="title"
+            placeholder="title"
+            value={title}
+            onChange={(event) => {  // 텍스트창에 값이 변경될 때 마다 실행되는 함수. title값을 갱신한다.
+              console.log(event.target.value);
+              setTitle(event.target.value);
+            }}
+          />
+        </p>
+        <p>
+          <textarea
+            name="body"
+            placeholder="body"
+            value={body}
+            onChange={(event) => {
+              setBody(event.target.value);
+            }}
+          ></textarea>
+        </p>
+        <p>
+          <input type="submit" value="Update"></input>
+        </p>
+      </form>
+    </article>
+  );
+}
+...
+
+function App() {
+...
+
+
+  } else if (mode === 'UPDATE') {
+    let title,
+      body = null;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].id === id) {
+        title = topics[i].title;
+        body = topics[i].body;
+      }
+    }
+    content = (
+      <Update
+        title={title}
+        body={body}
+        onUpdate={(title, body) => {
+          const updatedTopic = { id: id, title: title, body: body };
+          const newTopics = [...topics];
+          for (let i = 0; i < newTopics.length; i++) {
+            if (newTopics[i].id === id) {
+              newTopics[i] = updatedTopic;
+              break;
+            }
+          }
+          setTopics(newTopics);
+          setMode('READ');
+        }}
+      ></Update>
+    );
+  }
+  ...
+
+```
