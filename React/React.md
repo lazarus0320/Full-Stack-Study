@@ -1,7 +1,11 @@
 # React
 
-` index.js `, ` index.css ` => 전역적인 부분을 설정함. <br>
-` App.js `, ` App.css ` => 메인 화면 부분을 설정함.
+## 구축
+node.js 설치
+vscdoe 터미널에
+
+npx create-react-app .
+.은 현재 경로를 지칭하는 표현임.
 
 
 ## 실행
@@ -12,6 +16,9 @@
 ## 배포
 터미널 => npm run build
 build폴더와 그 안에 배포 파일들이 생성됨.
+
+` index.js `, ` index.css ` => 전역적인 부분을 설정함. <br>
+` App.js `, ` App.css ` => 메인 화면 부분을 설정함.
 
 npx serve -s build : 어떤 경로든 상관없이 build 폴더에 있는 index.html파일을 서비스해줌.
 http://localhost:3000로 이동하면 개발환경 버전이 아니라 실제 서비스된 버전의 결과물을 확인할 수 있음.
