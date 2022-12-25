@@ -1,0 +1,99 @@
+.App {
+  padding-left: 180px;
+  padding-right: 180px;
+  padding-bottom: 180px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.cross-center {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin: -30px;
+  margin-top: 30px;
+}
+
+.button-normal {
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.875rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: #0d6efd;
+  color: #ffffff;
+}
+
+.button-active {
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.875rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #0d6efd;
+}
+
+.banner-text {
+  position: absolute;
+  font-size: 50px;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.cropped {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.cropped img {
+  margin: -400px 0px 0px -400px;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+.center-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.in {
+  text-indent: 10px;
+}
+.underline {
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.font-blue {
+  color: rgb(118, 118, 202);
+}
+
+.font-red {
+  color: red;
+}
+
+.border-round {
+  border-radius: 0.5em;
+  padding: 2px;
+  margin: 3px;
+  color: rgb(255, 65, 65);
+  background-color: rgb(255, 222, 222);
+}
